@@ -1,4 +1,4 @@
-package com.croco.interview.management.user.security;
+package com.croco.interview.management.user;
 
 import com.croco.interview.core.security.filter.JWTFilter;
 import org.springframework.context.annotation.Bean;
