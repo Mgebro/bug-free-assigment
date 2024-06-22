@@ -29,6 +29,7 @@ dependencies {
 	api("org.springframework.boot:spring-boot-starter-security")
 	api("org.springframework.boot:spring-boot-starter-validation")
 	api("org.springframework.boot:spring-boot-starter-web")
+	api("org.springdoc:springdoc-openapi-starter-webmvc-ui:2.5.0")
 	api("org.springframework.kafka:spring-kafka")
 	api("com.auth0:java-jwt:4.4.0")
 	compileOnly("org.projectlombok:lombok")
