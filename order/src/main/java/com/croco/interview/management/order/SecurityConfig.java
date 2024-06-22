@@ -1,4 +1,4 @@
-package com.croco.interview.management.user;
+package com.croco.interview.management.order;
 
 import com.croco.interview.core.security.filter.JWTFilter;
 import org.springframework.context.annotation.Bean;
@@ -36,8 +36,10 @@ public class SecurityConfig {
     ) throws Exception {
         http
                 .authorizeHttpRequests((requests) -> requests
-                        .requestMatchers("/api/**").permitAll()
-                        .anyRequest().authenticated()
+                        .requestMatchers(
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**"
+                        ).permitAll()
                 )
                 .csrf(CsrfConfigurer::disable)
                 .cors(Customizer.withDefaults())
