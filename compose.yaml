@@ -1,17 +1,19 @@
 services:
-  postgres:
-    image: 'postgres:latest'
+  pgdb-users:
+    container_name: bfa-db
+    image: postgres
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root_password
       POSTGRES_DB: postgres
-      POSTGRES_MULTIPLE_DATABASES: users,orders
     ports:
       - "5432:5432"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
 
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
-    container_name: bfr-zookeeper
+    container_name: bfa-zookeeper
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
     ports:
@@ -19,7 +21,7 @@ services:
 
   kafka:
     image: confluentinc/cp-kafka:latest
-    container_name: bfr-kafka
+    container_name: bfa-kafka
     user: root
     depends_on:
       - zookeeper

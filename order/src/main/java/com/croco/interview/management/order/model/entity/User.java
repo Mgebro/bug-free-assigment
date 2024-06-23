@@ -14,7 +14,7 @@ import java.time.Instant;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "users")
+@Table(name = "order_users")
 @Builder(setterPrefix = "with")
 public class User {
 

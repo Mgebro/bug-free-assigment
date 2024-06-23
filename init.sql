@@ -1,0 +1,7 @@
+CREATE USER root_users WITH ENCRYPTED PASSWORD 'root_password';
+CREATE DATABASE users;
+GRANT ALL PRIVILEGES ON DATABASE users TO root_users;
+
+CREATE USER root_orders WITH ENCRYPTED PASSWORD 'root_password';
+CREATE DATABASE orders;
+GRANT ALL PRIVILEGES ON DATABASE orders TO root_orders;
