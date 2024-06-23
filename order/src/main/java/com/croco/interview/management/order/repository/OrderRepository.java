@@ -1,7 +1,6 @@
 package com.croco.interview.management.order.repository;
 
 import com.croco.interview.management.order.model.entity.Order;
-import com.croco.interview.management.order.model.entity.User;
 import com.croco.interview.management.order.model.enums.Status;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

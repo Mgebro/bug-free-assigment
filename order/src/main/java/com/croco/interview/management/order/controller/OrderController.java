@@ -41,7 +41,7 @@ public class OrderController {
             @RequestParam Optional<Integer> size,
             @RequestParam Optional<List<Status>> statuses
     ) {
-        return orderService.getOrders(page, size, statuses);
+        return orderService.getOrders(page.orElse(0), size.orElse(20), statuses);
     }
 
     @PutMapping("/{id}")
