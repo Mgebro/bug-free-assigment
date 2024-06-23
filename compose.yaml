@@ -43,6 +43,7 @@ services:
 
   hazelcast:
     image: hazelcast/hazelcast
+    container_name: bfa-hazelcast
     ports:
       - "5701:5701"
     networks:

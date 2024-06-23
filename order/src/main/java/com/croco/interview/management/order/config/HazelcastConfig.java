@@ -15,6 +15,8 @@ import org.springframework.cache.interceptor.KeyGenerator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
+
 @Configuration
 @EnableCaching
 @RequiredArgsConstructor
@@ -28,6 +30,10 @@ public class HazelcastConfig extends CachingConfigurerSupport {
         config.getSerializationConfig().addSerializerConfig(new SerializerConfig()
                 .setImplementation(new PageableOrderEntitySerializer(objectMapper))
                 .setTypeClass(PageableResponse.class));
+        config.getNetworkConfig()
+                .setAddresses(List.of("bfa-hazelcast"));
+
+
         HazelcastInstance client = HazelcastClient.newHazelcastClient(config);
         return new HazelcastCacheManager(client);
     }

@@ -16,7 +16,6 @@ public class PageableOrderEntitySerializer implements StreamSerializer<PageableR
 
     private final ObjectMapper objectMapper;
 
-
     @Override
     public void write(ObjectDataOutput objectDataOutput, PageableResponse<OrdersResponse> ordersResponsePageableResponse) throws IOException {
         objectDataOutput.writeString(objectMapper.writeValueAsString(ordersResponsePageableResponse));
