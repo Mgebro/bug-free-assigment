@@ -40,6 +40,7 @@ public class SecurityConfig {
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**"
                         ).permitAll()
+                        .anyRequest().authenticated()
                 )
                 .csrf(CsrfConfigurer::disable)
                 .cors(Customizer.withDefaults())
