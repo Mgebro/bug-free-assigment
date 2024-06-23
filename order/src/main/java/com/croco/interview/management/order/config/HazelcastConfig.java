@@ -1,5 +1,6 @@
 package com.croco.interview.management.order.config;
 
+import com.croco.interview.management.order.model.HazelcastProperties;
 import com.croco.interview.management.order.model.response.PageableResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.hazelcast.client.HazelcastClient;
@@ -8,6 +9,7 @@ import com.hazelcast.config.SerializerConfig;
 import com.hazelcast.core.HazelcastInstance;
 import com.hazelcast.spring.cache.HazelcastCacheManager;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.CachingConfigurerSupport;
 import org.springframework.cache.annotation.EnableCaching;
@@ -23,6 +25,7 @@ import java.util.List;
 public class HazelcastConfig extends CachingConfigurerSupport {
 
     private final ObjectMapper objectMapper;
+    private final HazelcastProperties hazelcastProperties;
 
     @Bean
     public CacheManager cacheManager() {
@@ -31,8 +34,7 @@ public class HazelcastConfig extends CachingConfigurerSupport {
                 .setImplementation(new PageableOrderEntitySerializer(objectMapper))
                 .setTypeClass(PageableResponse.class));
         config.getNetworkConfig()
-                .setAddresses(List.of("bfa-hazelcast"));
-
+                .setAddresses(List.of(hazelcastProperties.server()));
 
         HazelcastInstance client = HazelcastClient.newHazelcastClient(config);
         return new HazelcastCacheManager(client);
