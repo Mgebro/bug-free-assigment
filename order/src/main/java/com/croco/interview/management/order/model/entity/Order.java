@@ -16,6 +16,7 @@ import java.time.Instant;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "orders")
 @Builder(setterPrefix = "with")
 public class Order {
 

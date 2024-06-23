@@ -15,6 +15,7 @@ import java.time.Instant;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Table(name = "users")
 @Builder(setterPrefix = "with")
 public class User {
 
