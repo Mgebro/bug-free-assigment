@@ -13,6 +13,7 @@ import com.croco.interview.management.order.repository.OrderRepository;
 import com.croco.interview.management.order.repository.UserRepository;
 import jakarta.annotation.Nullable;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -49,6 +50,7 @@ public class OrderService {
         orderRepository.save(order);
     }
 
+    @Cacheable(cacheNames = "order", key = "#id")
     public OrderResponse getOrder(Long id) {
         final Order order = Objects.requireNonNull(orderRepository.findOrderById(id), "Order with id [%s] not found!".formatted(id));
         return OrderResponse.builder()
@@ -66,12 +68,10 @@ public class OrderService {
                 .build();
     }
 
-    public PageableResponse<OrdersResponse> getOrders(Optional<Integer> page, Optional<Integer> size, Optional<List<Status>> statuses) {
+    @Cacheable(cacheNames = "orders", key = "{ #page, #size }")
+    public PageableResponse<OrdersResponse> getOrders(Integer page, Integer size, Optional<List<Status>> statuses) {
         final Page<Order> result = orderRepository.findAllByStatusIn(
-                PageRequest.of(
-                        page.orElse(0),
-                        size.orElse(20)
-                ),
+                PageRequest.of(page, size),
                 statuses.orElse(
                         List.of(
                                 Status.ACTIVE,
