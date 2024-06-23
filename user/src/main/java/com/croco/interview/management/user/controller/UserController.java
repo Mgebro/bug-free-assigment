@@ -6,7 +6,6 @@ import com.croco.interview.management.user.model.response.PageableResponse;
 import com.croco.interview.management.user.model.response.UserResponse;
 import com.croco.interview.management.user.model.response.UsersResponse;
 import com.croco.interview.management.user.service.UserService;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,21 +17,20 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/user")
+@RequestMapping("/api")
 public class UserController {
 
     private final UserService userService;
 
-    @PostMapping
+    @PostMapping("/public/user")
     @ResponseStatus(HttpStatus.CREATED)
     void createUser(@RequestBody @Valid CreateUserRequest request) {
         userService.createUser(request);
     }
 
-    @GetMapping("/list")
+    @GetMapping("/user/list")
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.PARTIAL_CONTENT)
-    @SecurityRequirement(name = "Authorization")
     PageableResponse<UsersResponse> getUsers(
             @RequestParam Optional<Integer> page,
             @RequestParam Optional<Integer> size
@@ -40,32 +38,31 @@ public class UserController {
         return userService.getUsers(page, size);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     @PreAuthorize("hasRole('ADMIN')")
-    @SecurityRequirement(name = "Authorization")
     UserResponse getUser(@PathVariable Long id) {
         return userService.getUser(id);
     }
 
-    @GetMapping("/me")
+    @GetMapping("/user/me")
     UserResponse getMe(Principal principal) {
         return userService.getMe(principal.getName());
     }
 
-    @PutMapping("/me")
+    @PutMapping("/user/me")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void updateMe(Principal principal, @RequestBody @Valid UpdateUserRequest request) {
         userService.updateMe(principal.getName(), request);
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/user/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void updateUser(@PathVariable Long id, @RequestBody @Valid UpdateUserRequest request) {
         userService.updateUser(id, request);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/user/{id}")
     @PreAuthorize("hasRole('ADMIN')")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     void deleteUser(@PathVariable Long id) {
