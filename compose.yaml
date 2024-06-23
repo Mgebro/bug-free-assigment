@@ -66,6 +66,7 @@ services:
       - 8282:8282
     networks:
       - my-network
+    profiles: [prod]
 
   bfa-orders-server:
     container_name: order-server
@@ -74,6 +75,7 @@ services:
       - 8181:8181
     networks:
       - my-network
+    profiles: [prod]
 
 networks:
   my-network:

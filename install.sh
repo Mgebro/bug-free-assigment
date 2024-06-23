@@ -27,4 +27,4 @@ cd - || { echo "Failed to return to previous directory"; exit 1; }
 
 echo "All tasks completed successfully."
 
-docker compose up
+docker compose --profile prod up
