@@ -28,7 +28,25 @@ starting the production Docker environment.
 
 ## Setup
 
-### Core Library
+### Production Environment
+
+Ensure you are in the root directory of the repository.
+
+Give the read,write,execute permission for install script
+
+  ```bash
+  chmod +x install.sh
+   ```
+
+Run the `install.sh` script to build and start the production Docker environment:
+
+  ```bash
+  ./install.sh
+   ```
+
+### Local Environment
+
+#### Core Library
 
 1. Navigate to the core module directory:
    ```bash
@@ -39,7 +57,7 @@ starting the production Docker environment.
    ./gradlew publishToMavenLocal
    ```
 
-### User Microservice
+#### User Microservice
 
 1. Navigate to the user module directory:
    ```bash
@@ -50,7 +68,7 @@ starting the production Docker environment.
    ./gradlew build
    ```
 
-### Order Microservice
+#### Order Microservice
 
 1. Navigate to the order module directory:
    ```bash
@@ -60,8 +78,6 @@ starting the production Docker environment.
    ```bash
    ./gradlew build
    ```
-
-## Local Development Environment
 
 Ensure you are in the root directory of the repository.
 Build and start the local Docker environment using Docker Compose:
@@ -82,14 +98,9 @@ Build and start the local Docker environment using Docker Compose:
   java -jar order/build/libs/order-0.0.1-SNAPSHOT.jar
    ```
 
-## Production Environment
-Ensure you are in the root directory of the repository.
-Run the `install.sh` script to build and start the production Docker environment:
-  ```bash
-  ./install.sh
-   ```
-
 ## Usage
+
 ### OpenAPI Documentation
+
 Both microservices provide OpenAPI documentation accessible at `server:port/swagger-ui/index.html`
 
