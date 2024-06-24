@@ -41,7 +41,7 @@ Give the read,write,execute permission for install script
 Run the `install.sh` script to build and start the production Docker environment:
 
   ```bash
-  ./install.sh
+  sudo ./install.sh
    ```
 
 ### Local Environment
