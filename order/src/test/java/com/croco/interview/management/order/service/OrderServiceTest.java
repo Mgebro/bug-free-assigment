@@ -12,11 +12,12 @@ import com.croco.interview.management.order.repository.OrderRepository;
 import com.croco.interview.management.order.repository.UserRepository;
 import org.jetbrains.annotations.NotNull;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
@@ -31,16 +32,16 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyList;
 import static org.mockito.Mockito.*;
 
-@SpringBootTest
+@ExtendWith(MockitoExtension.class)
 public class OrderServiceTest {
 
-    @Autowired
+    @InjectMocks
     private OrderService orderService;
 
-    @MockBean
+    @Mock
     private OrderRepository orderRepository;
 
-    @MockBean
+    @Mock
     private UserRepository userRepository;
     @Captor
     private ArgumentCaptor<Order> captor;
@@ -91,7 +92,7 @@ public class OrderServiceTest {
 
         assertEquals("product", response.product());
         assertEquals("2", response.quantity());
-        assertEquals(new BigDecimal("60.0"), response.product());
+        assertEquals(new BigDecimal("60.0"), response.price());
         assertEquals("identifier", response.user().userIdentifier());
     }
 
