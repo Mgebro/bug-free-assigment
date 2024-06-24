@@ -37,7 +37,7 @@ public class UserService {
     private final KafkaTemplate<String, UserRegistered> kafkaTemplate;
 
     private <T> void updateField(Consumer<T> setter, @Nullable T value) {
-        if (setter != null) {
+        if (setter != null && value != null) {
             setter.accept(value);
         }
     }
