@@ -7,19 +7,27 @@ import org.testcontainers.containers.KafkaContainer;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.utility.DockerImageName;
 
+import java.util.List;
+
 @TestConfiguration(proxyBeanMethods = false)
 class TestcontainersConfiguration {
 
 	@Bean
 	@ServiceConnection
 	KafkaContainer kafkaContainer() {
-		return new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:latest"));
+		KafkaContainer kafkaContainer = new KafkaContainer(DockerImageName.parse("confluentinc/cp-kafka:latest"))
+				.withReuse(true);
+		kafkaContainer.setPortBindings(List.of("9092:9092"));
+		return kafkaContainer;
 	}
 
 	@Bean
 	@ServiceConnection
 	PostgreSQLContainer<?> postgresContainer() {
-		return new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
+		PostgreSQLContainer<?> postgreSQLContainer = new PostgreSQLContainer<>(DockerImageName.parse("postgres:latest"));
+		postgreSQLContainer.withReuse(true);
+		postgreSQLContainer.setPortBindings(List.of("5432:5432"));
+		return postgreSQLContainer;
 	}
 
 }

@@ -58,9 +58,9 @@ public class UserService {
         resultCompletableFuture.handleAsync((result, exception) -> {
             if (result != null) {
                 RecordMetadata metadata = result.getRecordMetadata();
-                log.debug("Publish finished for more details see: %s, exception: %s".formatted(metadata, exception));
+                log.info("Publish finished for more details see: %s, exception: %s".formatted(metadata, exception));
             } else {
-                log.debug("Publish finished with exception: %s".formatted(exception));
+                log.warn("Publish finished with exception: %s".formatted(exception));
             }
             return null;
         });
