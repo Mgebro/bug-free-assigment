@@ -4,6 +4,10 @@ CORE_DIR="./core"
 USER_DIR="./user"
 ORDERS_DIR="./order"
 
+export POSTGRES_URL='bfa-db:5432/orders'
+export KAFKA_URL='kafka:29094'
+export HAZELCAST_URL='bfa-hazelcast'
+
 echo "Building and publishing the core library"
 cd $CORE_DIR || { echo "Core directory not found"; exit 1; }
 ./gradlew publishToMavenLocal || { echo "Failed to publish core library"; exit 1; }
